@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'com.github.ben-manes.versions' version '0.17.0'
+}
+
+dependencies {
+    compile 'junit:junit:4.+'
+    compile 'com.sparkjava:spark-core:2.7.2'
+    compile 'org.graalvm.sdk:graal-sdk:1.0.0-rc16'
+}
+
+// WARN: This looks unnecessary
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(Jar) {
+    destinationDir = file("$rootDir/libs")
+}
+
+shadowJar {
+    baseName = 'app.deps'
+    classifier = null
+    version = null
+}
